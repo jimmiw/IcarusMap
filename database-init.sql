@@ -1,0 +1,14 @@
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE,
+  password VARCHAR(255)
+);
+
+CREATE TABLE pois (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  x FLOAT,
+  y FLOAT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
