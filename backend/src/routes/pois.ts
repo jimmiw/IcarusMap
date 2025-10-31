@@ -10,14 +10,18 @@ router.get("/", async (_, res) => {
 });
 
 router.post("/", auth, async (req: AuthRequest, res) => {
-  const { name, x, y } = req.body;
-  await db.execute("INSERT INTO pois (name, x, y, user_id) VALUES (?, ?, ?, ?)", [
+  const { name, x, y, poitype_id, location_id, active } = req.body;
+  const row = await db.execute("INSERT INTO pois (name, x, y, user_id, poitype_id, location_id, active) VALUES (?, ?, ?, ?, ?, ?, ?)", [
     name,
     x,
     y,
-    req.user!.id
+    req.user!.id,
+    poitype_id,
+    location_id,
+    active
   ]);
-  res.sendStatus(201);
+
+  res.status(201).json({ id: (row[0] as any).insertId, name, x, y, poitype_id, location_id, active });
 });
 
 // Delete a POI by id

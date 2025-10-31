@@ -1,7 +1,9 @@
 
 import dotenv from "dotenv";
 
-dotenv.config({ path: "../.env.local" });
+if (process.env.NODE_ENV !== "production") {
+    dotenv.config({ path: "../.env.local" });
+}
 
 import express from "express";
 import cors from "cors";

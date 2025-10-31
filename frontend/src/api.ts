@@ -8,7 +8,7 @@ export async function getPOIs(): Promise<POI[]> {
 }
 
 export async function addPOI(poi: Omit<POI, "id">, token: string) {
-  await fetch(`${API_URL}/pois`, {
+  const res = await fetch(`${API_URL}/pois`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,6 +16,8 @@ export async function addPOI(poi: Omit<POI, "id">, token: string) {
     },
     body: JSON.stringify(poi)
   });
+
+  return res.json();
 }
 
 export async function deletePOI(id: number, token: string) {
@@ -28,3 +30,6 @@ export async function deletePOI(id: number, token: string) {
   return res.json();
 }
 
+// TODO: add updatePOI function
+// TODO: add getLocations function
+// TODO: add getPOITypes function
