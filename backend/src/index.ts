@@ -11,7 +11,11 @@ import authRoutes from "./routes/auth";
 import poiRoutes from "./routes/pois";
 
 const app = express();
-app.use(cors());
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+app.use(cors({
+  origin: [frontendUrl], // or "*" for testing
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/api", authRoutes);

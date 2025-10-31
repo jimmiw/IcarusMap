@@ -1,6 +1,6 @@
 import { POI } from "./types";
 
-const API_URL = "http://localhost:3001/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function getPOIs(): Promise<POI[]> {
   const res = await fetch(`${API_URL}/pois`);
